@@ -1,4 +1,4 @@
-package org.lp.myUtils;
+package org.lp.jfacility;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

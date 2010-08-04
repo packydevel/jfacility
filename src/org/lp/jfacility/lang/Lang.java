@@ -1,4 +1,4 @@
-package org.lp.myUtils.lang;
+package org.lp.jfacility.lang;
 
 import java.io.File;
 /**Classe di metodi riusabili del package java.lang
