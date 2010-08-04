@@ -1,4 +1,4 @@
-package org.lp.myUtils;
+package org.lp.jfacility;
 //IMPORT JAVA
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -13,7 +13,7 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 //IMPORT MYUTILS
-import org.lp.myUtils.lang.Lang;
+import org.lp.jfacility.lang.Lang;
 /**Classe di metodi riusabili del package java.util
  *
  * @author luca

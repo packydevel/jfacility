@@ -1,6 +1,6 @@
 //http://www.java2s.com/Tutorial/Java/0120__Development/DealswiththedifferentversionoftheJavaVirtualMachine.htm
 
-package org.lp.myUtils.lang;
+package org.lp.jfacility.lang;
 
 /**Classe che individua la java virtual machine in uso
  *

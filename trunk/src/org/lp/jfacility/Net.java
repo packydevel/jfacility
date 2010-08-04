@@ -1,4 +1,4 @@
-package org.lp.myUtils;
+package org.lp.jfacility;
 
 import java.io.IOException;
 import java.net.InetAddress;

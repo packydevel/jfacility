@@ -1,4 +1,4 @@
-package org.lp.myUtils.crypto;
+package org.lp.jfacility.crypto;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
