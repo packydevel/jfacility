@@ -12,7 +12,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-//IMPORT MYUTILS
+
 import org.jfacility.lang.Lang;
 /**Classe di metodi riusabili del package java.util
  *
