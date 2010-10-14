@@ -6,6 +6,7 @@ import it.sauronsoftware.junique.JUnique;
 import java.io.File;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,8 +32,7 @@ public class Application {
 					.getClassName());
 			System.out.println(caller.getCanonicalName());
 			CLASS = caller;
-		} catch (Exception e) {
-		}
+		} catch (Exception e) {}
 
 		ROOT_DIRECTORY = retrieveRootDirectory();
 		IS_JAR = isJar();
@@ -168,20 +168,22 @@ public class Application {
 		}
 	}
 
-	public void restart(String command) {
-		ProcessBuilder pb = new ProcessBuilder("/usr/bin/java", "-jar",
-				ROOT_DIRECTORY + "/" + JAR_FILENAME);
-		pb.redirectErrorStream(true);
-		try {
-			JUnique.releaseLock(name);
-			Process p = pb.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		shutdown();
-	}
-
-	public void shutdown() {
-		System.exit(0);
-	}
+	
+    public void restart(String command) {
+        ArrayList<String> commands = new ArrayList<String>();
+        commands.add(org.jfacility.lang.System.getJavaHome()+File.separator+"bin"+File.separator+"java");
+        commands.add("-jar");
+        commands.add(ROOT_DIRECTORY + File.separator + JAR_FILENAME);
+        ProcessBuilder pb = new ProcessBuilder(commands);
+        //ProcessBuilder pb = new ProcessBuilder("/usr/bin/java", "-jar",
+        //        ROOT_DIRECTORY + File.separator + JAR_FILENAME);
+        pb.redirectErrorStream(true);
+        try {
+            JUnique.releaseLock(name);
+            Process p = pb.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        org.jfacility.lang.System.shutdown();
+    }
 }
