@@ -1,4 +1,4 @@
-<project default="build_all" basedir=".">
+<project name="FeedWorker" default="build_all" basedir=".">
 
 	<!--
                                                    ┌─► jarMain ───────────────────────────┐
