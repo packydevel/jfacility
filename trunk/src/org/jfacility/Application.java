@@ -62,19 +62,31 @@ public class Application {
 		if (classURL == null) {
 			return false;
 		}
-		Pattern p = Pattern.compile(System.getProperty("file.separator") + "[^"
-				+ System.getProperty("file.separator") + "]*\\.jar");
-		try {
-			Matcher m = p.matcher(URLDecoder.decode(classURL.toString(),
-					"UTF-8"));
-			m.find();
-			System.out.println(URLDecoder.decode(classURL.toString(), "UTF-8")
-					.substring(m.start() + 1, m.end()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		return classURL.toString().matches("jar\\:.*\\.jar\\!.*");
+	}
+	
+	private String retrieveMainJarFile() {
+		if (isJarApplication(applicationClass)) {
+			String name = applicationClass.getName().replaceAll("\\.", "/") + ".class";
+			URL classURL = Thread.currentThread().getContextClassLoader()
+					.getResource(name);
+
+			Pattern p = Pattern.compile(System.getProperty("file.separator") + "[^"
+					+ System.getProperty("file.separator") + "]*\\.jar");
+			try {
+				Matcher m = p.matcher(URLDecoder.decode(classURL.toString(),
+						"UTF-8"));
+				m.find();
+				System.out.println(URLDecoder.decode(classURL.toString(), "UTF-8")
+						.substring(m.start() + 1, m.end()));
+				return(URLDecoder.decode(classURL.toString(), "UTF-8")
+						.substring(m.start() + 1, m.end()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return "";
 	}
 
 	private String retrieveRootDirectory(Class<?> c) {
@@ -136,7 +148,7 @@ public class Application {
 
 	public void restart(String command) {
 		ProcessBuilder pb = new ProcessBuilder("/usr/bin/java", "-jar",
-				getRootDirectory() + "/" + name + ".jar");
+				getRootDirectory() + "/" + retrieveMainJarFile() + ".jar");
 		pb.redirectErrorStream(true);
 		try {
 			JUnique.releaseLock(name);
