@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jfacility.exception.AlreadyStartedApplicationException;
+import org.jfacility.lang.MySystem;
 
 public class Application {
 
@@ -138,8 +139,7 @@ public class Application {
 
     public void restart(String command) {
         ArrayList<String> commands = new ArrayList<String>();
-        commands.add(org.jfacility.lang.MySystem.getJavaHome() + File.separator + "bin" +
-                File.separator + "java");
+        commands.add(MySystem.getJavaHome() + File.separator + "bin" + File.separator + "java");
         commands.add("-jar");
         commands.add(ROOT_DIRECTORY + File.separator + JAR_FILENAME);
         ProcessBuilder pb = new ProcessBuilder(commands);
