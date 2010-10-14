@@ -148,7 +148,7 @@ public class Application {
 
 	public void restart(String command) {
 		ProcessBuilder pb = new ProcessBuilder("/usr/bin/java", "-jar",
-				getRootDirectory() + "/" + retrieveMainJarFile() + ".jar");
+				getRootDirectory() + "/" + retrieveMainJarFile());
 		pb.redirectErrorStream(true);
 		try {
 			JUnique.releaseLock(name);
