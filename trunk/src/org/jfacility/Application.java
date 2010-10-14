@@ -7,6 +7,8 @@ import java.io.File;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jfacility.exception.AlreadyStartedApplicationException;
 
@@ -60,6 +62,18 @@ public class Application {
 		if (classURL == null) {
 			return false;
 		}
+		Pattern p = Pattern.compile(System.getProperty("file.separator") + "[^"
+				+ System.getProperty("file.separator") + "]*\\.jar");
+		try {
+			Matcher m = p.matcher(URLDecoder.decode(classURL.toString(),
+					"UTF-8"));
+			m.find();
+			System.out.println(URLDecoder.decode(classURL.toString(), "UTF-8")
+					.substring(m.start() + 1, m.end()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return classURL.toString().matches("jar\\:.*\\.jar\\!.*");
 	}
 
