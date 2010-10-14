@@ -38,7 +38,7 @@ public class JVM {
 	 * 
 	 */
 	public JVM() {
-		this(System.getJavaVersion());
+		this(MySystem.getJavaVersion());
 	}
 
 	/**

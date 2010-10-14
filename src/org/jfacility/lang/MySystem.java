@@ -6,7 +6,7 @@ import java.io.File;
  *
  * @author luca
  */
-public class System {
+public class MySystem {
     /** Restituisce la cartella di lavoro attuale dell'utente
      *
      * @return stringa percorso
