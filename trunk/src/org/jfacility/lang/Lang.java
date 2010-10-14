@@ -186,88 +186,6 @@ public class Lang {
         return Long.parseLong(text, base);
     }
 
-    /**Verifica se il sistema operativo in uso è windows
-     *
-     * @return true = windows, altrimenti false
-     */
-    public static boolean isWindows() {
-        boolean windows = false;
-        String osName = getOsName().toLowerCase();
-        if (!osName.equals("linux")) {
-            if ((osName.length() > 6)
-                    && (osName.substring(0, 7).toLowerCase().equalsIgnoreCase("windows"))) {
-                windows = true;
-            }
-        }
-        return windows;
-    }
-
-    /** Restituisce la cartella di lavoro attuale dell'utente
-     *
-     * @return stringa percorso
-     */
-    public static String getUserDir() {
-        return System.getProperty("user.dir");
-    }
-
-    /**
-     *
-     * @return
-     */
-    public static File getFileUserDir() {
-        return new File(getUserDir());
-    }
-
-    /**
-     * Restituisce la cartella home dell'utente
-     *
-     * @return stringa percorso
-     */
-    public static String getUserHome() {
-        return System.getProperty("user.home");
-    }
-
-    /**
-     *
-     * @return
-     */
-    public static File getFileUserHome() {
-        return new File(getUserHome());
-    }
-
-    /**
-     * Restituisce il nome del sistema operativo
-     *
-     * @return stringa nome OS
-     */
-    public static String getOsName() {
-        return System.getProperty("os.name");
-    }
-
-    /**Restituisce la versione in uso di java
-     *
-     * @return Stringa versione java
-     */
-    public static String getJavaVersion() {
-        return System.getProperty("java.version");
-    }
-
-    public static String getJavaHome() {
-        return System.getProperty("java.home");
-    }
-
-    public static void printVariables() {
-        for (String s : System.getenv().keySet()) {
-            System.out.println(s + "=" + System.getenv(s));
-        }
-    }
-
-    public static void printProperties() {
-        for (Object s : System.getProperties().keySet()) {
-            System.out.println(s + "=" + System.getProperty((String) s));
-        }
-    }
-
     /**Verifica se il testo non è nullo e non è uguale alla stringa ""
      *
      * @param text testo da verificare
@@ -279,9 +197,5 @@ public class Lang {
             verify = true;
         }
         return verify;
-    }
-
-    public static void shutdown() {
-        System.exit(0);
     }
 }
