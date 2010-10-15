@@ -88,8 +88,4 @@ public class MySystem {
         }
         return windows;
     }
-
-    public static void shutdown() {
-        java.lang.System.exit(0);
-    }
 }
