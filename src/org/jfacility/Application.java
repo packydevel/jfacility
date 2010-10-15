@@ -137,7 +137,7 @@ public class Application {
         }
     }
 
-    public void restart(String command) {
+    public void restart() {
         ArrayList<String> commands = new ArrayList<String>();
         commands.add(MySystem.getJavaHome() + File.separator + "bin" + File.separator + "java");
         commands.add("-jar");
@@ -152,7 +152,11 @@ public class Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        org.jfacility.lang.MySystem.shutdown();
+        shutdown();
+    }
+    
+    public void shutdown() {
+        java.lang.System.exit(0);
     }
 
     public String getName() {
