@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * Classe di metodi riusabili del package javax.swing
@@ -173,4 +175,10 @@ public class Swing {
 		else
 			return null;
 	}
+
+        public static void tableSorter(JTable table){
+            table.setAutoCreateRowSorter(true);
+            TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
+            table.setRowSorter(sorter);
+        }
 }
