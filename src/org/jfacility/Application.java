@@ -17,13 +17,13 @@ public class Application {
 
     public static Application APPLICATION;
     private static Class<?> CLASS;
+    public static String BUILD_NUMBER;
     public static String ROOT_DIRECTORY;
     public static String HOME_DIRECTORY;
     public static boolean IS_JAR;
     public String JAR_FILENAME;
     private String name;
     private String author;
-    private String build;
     private Boolean singleInstance = false;
 
     private Application() {
@@ -46,6 +46,10 @@ public class Application {
             return new Application();
         }
         return APPLICATION;
+    }
+    
+    public static String getBuildNumber() {
+    	return CLASS.getPackage().getImplementationVersion();
     }
 
     public String getHomeDirectory() {
@@ -173,14 +177,6 @@ public class Application {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getBuild() {
-        return build;
-    }
-
-    public void setBuild(String build) {
-        this.build = build;
     }
 
     public void enableSingleInstance(boolean flag) {
