@@ -17,41 +17,7 @@
 	<property name="cls" value="./bin" />
 	<property name="dist" value="./dist" />
 	<property name="lib" value="./lib" />
-	<!--
-	<property name="jd" value="${dist}/JDownloader" />
-	<property name="res" value="../ressourcen" />
-	
-	<property name="pluginres" value="${dist}/pluginressourcen" />
-	<property name="keystore" value="${user.home}/Desktop/jDownloader.keystore" />
 
-	<loadfile property="svn.revision" srcFile="../.svn/entries">
-		<filterchain>
-			<headfilter lines="1" skip="3" />
-			<striplinebreaks />
-		</filterchain>
-	</loadfile>
-	
-	
-	<property name="pack.multios.name" value="JDownloader_multios_${svn.revision}.zip" />
-	<property name="pack.linux.name" value="JDownloader_linux_${svn.revision}.tar.bz2" />
-	<property name="pack.mac.name" value="JDownloader_mac_${svn.revision}.zip" />
-	<property name="pack.mac.dmg.name" value="JDownloader_mac_${svn.revision}.dmg" />
-	<property name="pack.windows.name" value="JDownloader_windows_${svn.revision}.zip" />
-
-	<property name="exclude.windows" value="**/*.exe, **/*.bat, **/*.dll, **/windows, **/windows/**/*" />
-	<property name="exclude.linux" value="**/*.sh, **/*.so, **/dbus, **/dbus/**/*, **/linux, **/linux/**/*" />
-	<property name="exclude.mac" value="**/*.scpt, **/osx, **/osx/**/*, **/mac, **/mac/**/*" />
-
-	<property name="exe.windows.script" value="${res}/nsis/nsis-setup.nsi" />
-	<property name="exe.web.script" value="${res}/nsis/webinstaller.nsi" />
-	-->
-	
-	<path id="classpath">
-		<fileset dir="${lib}" includes="**/*.jar" />
-	</path>
-
-	<property name="classpath" value="${toString:classpath}" />
-	
 	<echo message="${basedir}" />
 
 	<!-- Deletes the old build -->
@@ -63,94 +29,20 @@
 	<!-- Compiles the code -->
 	<target name="compile" depends="clean">
 		<mkdir dir="${cls}" />
-		<javac srcdir="${src}" destdir="${cls}" encoding="UTF-8" source="1.6" target="1.6">
-			<classpath refid="classpath" />
-		</javac>
+		<javac srcdir="${src}" destdir="${cls}" encoding="UTF-8" source="1.6" target="1.6" />
 		<echo message="Finished." />
 	</target>
 
 	<!-- build_all -->
-	<target name="build_all" depends="copy_res, jarMain">
+	<target name="build_all" depends="jarMain">
 		<echo message="Finished." />
-	</target>
-
-	<!-- Copies all the additional ressources -->
-	<target name="copy_res" depends="clean">
-		<!--
-		<copy todir="${jd}/jd">
-			<fileset dir="${res}/jd" includes="**/*" />
-		</copy>
-		<copy todir="${jd}/libs">
-			<fileset dir="${res}/libs" includes="**/*" />
-		</copy>
-		<copy file="../../AppWorkUtils/dist/appworkutils.jar" tofile="${jd}/libs/appworkutilities.jar" overwrite="true" failonerror="false" />
-		<copy todir="${jd}/licenses">
-			<fileset dir="${res}/licenses" includes="**/*" />
-		</copy>
-
-		<copy todir="${jd}/languages">
-			<fileset dir="../../AppWorkUtils/resources/languages/" includes="**/*.loc" />
-		</copy>
-		<copy todir="${jd}/images">
-			<fileset dir="../../AppWorkUtils/resources/images/" includes="**/*.png" />
-		</copy>
-		<copy todir="${jd}/tools">
-			<fileset dir="${res}/tools" includes="**/*" />
-		</copy>
-		<copy todir="${jd}">
-			<fileset dir="${res}" includes="*.txt, *.exe, *.bat, outdated.dat" />
-		</copy>
-		<mkdir dir="${jd}/tmp" />
-		-->
-		<copy todir="${dist}">
-			<fileset dir="${lib}" includes="**/*" />
-		</copy>
 	</target>
 
 	<!-- Make the default jar -->
 	<target name="jarMain" depends="compile">
-		<!--
-		<manifest file="${dist}/Manifest.MF">
-			<attribute name="Created-By" value="Luka Judge" />
-		</manifest>
-		<jar file="${jd}/libs/JDHttp.jar" manifest="${dist}/Manifest.MF">
-			<fileset dir="${cls}">
-				<include name="jd/http/**" />
-			</fileset>
-		</jar>
-		<jar file="${jd}/libs/JDGUI.jar" manifest="${dist}/Manifest.MF">
-			<fileset dir="${cls}">
-				<include name="jd/gui/**" />
-			</fileset>
-		</jar>
-		<jar file="${jd}/libs/JAntiCaptcha.jar" manifest="${dist}/Manifest.MF">
-			<fileset dir="${cls}">
-				<include name="jd/captcha/**" />
-				<exclude name="jd/captcha/methods/**" />
-			</fileset>
-		</jar>
-		<jar file="${jd}/libs/JDUtils.jar" manifest="${dist}/Manifest.MF">
-			<fileset dir="${cls}">
-				<include name="jd/nutils/**" />
-			</fileset>
-		</jar>
-		<delete file="${dist}/Manifest.MF" failonerror="false" />
-		-->
-		
-		<pathconvert pathsep=" " dirsep="/" property="class-path">
-		    <map from="${basedir}/lib" to="."/>
-			<path>
-				<fileset dir="${lib}" includes="**/*.jar" />
-			</path>
-			<!--
-			<mapper type="regexp" from="[\\/]dist[\\/]JDownloader[\\/](libs[\\/].*)" to="\1" />
-		    -->
-		</pathconvert>
-		
 		<manifest file="${dist}/Manifest.MF">
 			<attribute name="Created-By" value="Luka Judge" />
 			<!-- plugins that serialize own classes have to be put in the classpath -->
-			<attribute name="Class-Path" value="${class-path}" />
 		</manifest>
 		<jar file="${dist}/JFacility.jar" manifest="${dist}/Manifest.MF">
 			<fileset dir="${cls}">
