@@ -1,4 +1,4 @@
-package org.jfacility.swing;
+package org.jfacility.javax.swing;
 
 //IMPORT JAVA
 import java.awt.Component;

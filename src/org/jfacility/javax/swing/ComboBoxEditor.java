@@ -1,4 +1,4 @@
-package org.jfacility.swing;
+package org.jfacility.javax.swing;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
