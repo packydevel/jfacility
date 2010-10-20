@@ -1,4 +1,4 @@
-package org.jfacility.crypto;
+package org.jfacility.javax.crypto;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

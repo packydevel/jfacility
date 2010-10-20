@@ -1,4 +1,4 @@
-package org.jfacility.crypto;
+package org.jfacility.javax.crypto;
 
 //TODO: mai testata
 

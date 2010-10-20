@@ -14,7 +14,7 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import org.jfacility.lang.Lang;
+import org.jfacility.java.lang.Lang;
 
 /**
  * Classe di metodi riusabili del package java.util
