@@ -12,7 +12,7 @@ public class MySystem {
      * @return stringa percorso
      */
     public static String getUserDir() {
-        return java.lang.System.getProperty("user.dir");
+        return System.getProperty("user.dir");
     }
 
     /**
@@ -29,7 +29,7 @@ public class MySystem {
      * @return stringa percorso
      */
     public static String getUserHome() {
-        return java.lang.System.getProperty("user.home");
+        return System.getProperty("user.home");
     }
 
     /**
@@ -40,13 +40,26 @@ public class MySystem {
         return new File(getUserHome());
     }
 
-    /**
-     * Restituisce il nome del sistema operativo
+    /**Restituisce il nome del sistema operativo
      *
      * @return stringa nome OS
      */
     public static String getOsName() {
-        return java.lang.System.getProperty("os.name");
+        return System.getProperty("os.name");
+    }
+    /**Restituisce il nome del sistema operativo
+     *
+     * @return stringa nome OS
+     */
+    public static String getOsArchitecture() {
+        return System.getProperty("os.arch");
+    }
+    /**Restituisce il nome del sistema operativo
+     *
+     * @return stringa nome OS
+     */
+    public static String getOsVersion() {
+        return System.getProperty("os.version");
     }
 
     /**Restituisce la versione in uso di java
@@ -54,23 +67,32 @@ public class MySystem {
      * @return Stringa versione java
      */
     public static String getJavaVersion() {
-        return java.lang.System.getProperty("java.version");
+        return System.getProperty("java.version");
+    }
+    /**Restituisce vendor in uso di java
+     *
+     * @return Stringa vendor java
+     */
+    public static String getJavaVendor() {
+        return System.getProperty("java.vendor");
     }
 
     public static String getJavaHome() {
-        return java.lang.System.getProperty("java.home");
+        return System.getProperty("java.home");
+    }
+
+    public static String getJavaTempDir(){
+        return System.getProperty("java.io.tmpdir");
     }
 
     public static void printVariables() {
-        for (String s : java.lang.System.getenv().keySet()) {
-            java.lang.System.out.println(s + "=" + java.lang.System.getenv(s));
-        }
+        for (String s : java.lang.System.getenv().keySet())
+            System.out.println(s + "=" + java.lang.System.getenv(s));
     }
 
     public static void printProperties() {
-        for (Object s : java.lang.System.getProperties().keySet()) {
-            java.lang.System.out.println(s + "=" + java.lang.System.getProperty((String) s));
-        }
+        for (Object s : java.lang.System.getProperties().keySet())
+            System.out.println(s + "=" + java.lang.System.getProperty((String) s));
     }
 
     /**Verifica se il sistema operativo in uso è windows
