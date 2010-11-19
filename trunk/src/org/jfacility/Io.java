@@ -9,8 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * Classe di metodi riusabili del package java.io
+/**Classe di metodi riusabili del package java.io
  * 
  * @author luca
  */
@@ -37,10 +36,16 @@ public class Io {
      * @param path percorso destinazione
      * @param name nuovo nome file
      */
-    public static void moveFile(File from, String path, String name){
+    public static void moveFile(File from, String path, String name) throws IOException{
         File dir = new File(path);
-        from.renameTo(new File(dir, name));
-        //return from;
+        if (dir.exists()){
+            File newFile = new File(dir, name);
+            if (!from.renameTo(newFile)){
+                copyFile(from, newFile);
+                from.delete();
+            }
+        } else
+            throw new IOException("path not exists");
     }    
     /**Copia un file
      *
