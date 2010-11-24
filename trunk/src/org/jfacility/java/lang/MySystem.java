@@ -81,6 +81,10 @@ public class MySystem {
         return System.getProperty("java.home");
     }
 
+    public static String getJavaCommand(){
+        return getJavaHome() + File.separator + "bin" + File.separator + "java";
+    }
+
     public static String getJavaTempDir(){
         return System.getProperty("java.io.tmpdir");
     }
