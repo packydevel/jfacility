@@ -185,5 +185,6 @@ public class Swing {
         table.setAutoCreateRowSorter(true);
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(table.getModel());
         table.setRowSorter(sorter);
+        table.revalidate();
     }
 }
