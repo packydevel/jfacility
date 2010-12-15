@@ -1,5 +1,6 @@
-//www.java2s.com/Tutorial/Java/0120__Development/DealswiththedifferentversionoftheJavaVirtualMachine.htm
 package org.jfacility.java.lang;
+
+import java.io.File;
 
 /**Classe che individua la java virtual machine in uso
  * 
@@ -33,33 +34,31 @@ public class JVM {
      *
      */
     public JVM() {
-        this(MySystem.getJavaVersion());
+        this(getVersion());
     }
 
     /**
      * Constructor for the OS object
      */
     public JVM(String p_JavaVersion) {
-        if (p_JavaVersion.startsWith("1.7.")) {
+        if (p_JavaVersion.startsWith("1.7."))
             jdkVersion = JDK1_7;
-        } else if (p_JavaVersion.startsWith("1.6.")) {
+        else if (p_JavaVersion.startsWith("1.6."))
             jdkVersion = JDK1_6;
-        } else if (p_JavaVersion.startsWith("1.5.")) {
+        else if (p_JavaVersion.startsWith("1.5."))
             jdkVersion = JDK1_5;
-        } else if (p_JavaVersion.startsWith("1.4.")) {
+        else if (p_JavaVersion.startsWith("1.4."))
             jdkVersion = JDK1_4;
-        } else if (p_JavaVersion.startsWith("1.3.")) {
+        else if (p_JavaVersion.startsWith("1.3."))
             jdkVersion = JDK1_3;
-        } else if (p_JavaVersion.startsWith("1.2.")) {
+        else if (p_JavaVersion.startsWith("1.2."))
             jdkVersion = JDK1_2;
-        } else if (p_JavaVersion.startsWith("1.1.")) {
+        else if (p_JavaVersion.startsWith("1.1."))
             jdkVersion = JDK1_1;
-        } else if (p_JavaVersion.startsWith("1.0.")) {
+        else if (p_JavaVersion.startsWith("1.0."))
             jdkVersion = JDK1_0;
-        } else // unknown version, assume 1.4
-        {
+        else // unknown version, assume 1.4
             jdkVersion = JDK1_4;
-        }
     }
 
     public boolean isOrLater(int p_Version) {
@@ -92,5 +91,36 @@ public class JVM {
 
     public boolean isOneDotSeven() {
         return jdkVersion == JDK1_7;
+    }
+    
+    /**Restituisce la versione in uso di java
+     *
+     * @return Stringa versione java
+     */
+    public static String getVersion() {
+        return System.getProperty("java.version");
+    }
+    /**Restituisce vendor in uso di java
+     *
+     * @return Stringa vendor java
+     */
+    public static String getVendor() {
+        return System.getProperty("java.vendor");
+    }
+
+    public static String getHome() {
+        return System.getProperty("java.home");
+    }
+
+    public static String getCommand(){
+        return getHome() + File.separator + "bin" + File.separator + "java";
+    }
+
+    public static String getTempDir(){
+        return System.getProperty("java.io.tmpdir");
+    }
+    
+    public static boolean isVendorSun(){
+        return getVendor().toLowerCase().startsWith("sun");
     }
 }

@@ -62,33 +62,6 @@ public class MySystem {
         return System.getProperty("os.version");
     }
 
-    /**Restituisce la versione in uso di java
-     *
-     * @return Stringa versione java
-     */
-    public static String getJavaVersion() {
-        return System.getProperty("java.version");
-    }
-    /**Restituisce vendor in uso di java
-     *
-     * @return Stringa vendor java
-     */
-    public static String getJavaVendor() {
-        return System.getProperty("java.vendor");
-    }
-
-    public static String getJavaHome() {
-        return System.getProperty("java.home");
-    }
-
-    public static String getJavaCommand(){
-        return getJavaHome() + File.separator + "bin" + File.separator + "java";
-    }
-
-    public static String getJavaTempDir(){
-        return System.getProperty("java.io.tmpdir");
-    }
-
     public static void printVariables() {
         for (String s : java.lang.System.getenv().keySet())
             System.out.println(s + "=" + java.lang.System.getenv(s));
