@@ -1,6 +1,7 @@
 package org.jfacility;
 
 //IMPORT JAVA
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
@@ -26,6 +27,17 @@ public class Awt {
 				(Toolkit.getDefaultToolkit().getScreenSize().width - frameSize.width) / 2,
 				(Toolkit.getDefaultToolkit().getScreenSize().height - frameSize.height) / 2);
 	}// end centraFrame
+
+	public static void centerComponent(Window frame, Component component) {
+		System.out.println(frame.getLocation());
+		System.out.println(frame.getWidth());
+		System.out.println(frame.getHeight());
+		component.setLocation(
+				frame.getLocation().x
+						+ (frame.getWidth() - component.getWidth()) / 2,
+				frame.getLocation().y
+						+ (frame.getHeight() - component.getHeight()) / 2);
+	}
 
 	/**
 	 * Restituisce lista dei font family disponibili
