@@ -9,14 +9,13 @@ import java.io.IOException;
  */
 public class SystemFileManager {
     
-	private static final String pathParameter = "%%path%%";
+    private static final String pathParameter = "%%path%%";
     private static Object[] explorer;
     
     public static boolean openExplorer(File path) throws IOException {
         if (path == null) 
             return false;
         JVM jvm = new JVM();
-        
         if (jvm.isOrLater(16)) {
             java.awt.Desktop.getDesktop().open(path);
             return true;
