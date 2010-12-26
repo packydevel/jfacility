@@ -1,7 +1,5 @@
 package org.jfacility.java.lang;
 
-import java.io.File;
-
 /**Classe di metodi riusabili del package java.lang
  * 
  * @author luca
