@@ -9,17 +9,19 @@ import java.io.IOException;
  */
 public class SystemFileManager {
     
-    private static String[] path = new String[] {"%%path%%"};
+	private static final String pathParameter = "%%path%%";
     private static Object[] explorer;
     
     public static boolean openExplorer(File path) throws IOException {
         if (path == null) 
             return false;
         JVM jvm = new JVM();
+        
         if (jvm.isOrLater(16)) {
             java.awt.Desktop.getDesktop().open(path);
             return true;
         }
+        
         while (path != null && !path.isDirectory())
             path = path.getParentFile();
         
@@ -28,14 +30,10 @@ public class SystemFileManager {
         
         if (path != null && explorer != null) {
             final String spath = path.getAbsolutePath();
-            final String[] paramsArray = (String[]) explorer[2];
-            final int length = paramsArray.length;
-            final String[] finalParams = new String[length];
+            final String[] optionList = (String[]) explorer[2];
+            final String parameter = ((String) explorer[3]).replace("%%path%%", spath);
 
-            for (int i = 0; i < length; i++)
-                finalParams[i] = paramsArray[i].replace("%%path%%", spath);
-
-            runCommand((String) explorer[1], finalParams);
+            runCommand((String) explorer[1], optionList, parameter);
             return true;
         }
 
@@ -44,36 +42,41 @@ public class SystemFileManager {
     
     private static Object[] autoGetExplorerCommand() {
         if (OS.isWindows())
-            return new Object[] { "Explorer", "explorer", path};
+            return new String[] { "Explorer", "explorer", null, pathParameter};
         else if (OS.isMac())
-            return new Object[] { "Open", "/usr/bin/open", path };
+            return new String[] { "Open", "/usr/bin/open", null, pathParameter };
         else {
-            final Object[][] programms = new Object[][] { 
-                { "dolphin", path }, 
-                { "konqueror", path }, 
-                { "thunar", path }, 
-                { "rox", path }, 
-                { "pcmanfm", path }, 
-                { "nautilus", new String[] { "--browser", "--no-desktop", "%%path%%" } } 
+            Object[][] programs = new Object[][] { 
+                { "dolphin",null, null}, 
+                { "konqueror",null, null},
+                { "thunar",null, null},
+                { "rox",null, null},
+                { "pcmanfm",null, null},
+                { "nautilus", new String[] { "--browser", "--no-desktop"}, null} 
             };
             
-            final String[] charset = System.getenv("PATH").split(":");
-            for (String element : charset) {
-                for (Object[] element2 : programms) {
-                    final File fi = new File(element, (String) element2[0]);
+            for (Object[] program: programs) {
+            	program[program.length-1] = pathParameter;
+            }
+            
+            final String[] environmentPathElement = System.getenv("PATH").split(":");
+            for (String element : environmentPathElement) {
+                for (Object[] program : programs) {
+                    final File fi = new File(element, (String) program[0]);
                     if (fi.isFile()) 
-                        return new Object[] { (String) element2[0], 
+                        return new Object[] { (String) program[0], 
                                             fi.getAbsolutePath(), 
-                                            element2[1] };
+                                            program[1], program[2]};
                 }
             }
         }
         return null;
     }
     
-    private static void runCommand(final String command, final String[] parameter) {
+    private static void runCommand(final String command, final String[] optionList, final String parameter) {
         final Executer exec = new Executer(command);
-        exec.addParameters(parameter);
+        exec.setOptionList(optionList);
+        exec.setParameter(parameter);
         exec.start();
     }
 }
