@@ -16,7 +16,9 @@ public class JVM {
     public final static int JDK1_5 = 15;
     public final static int JDK1_6 = 16;
     public final static int JDK1_7 = 17;
+    
     private static JVM current;
+    private int jdkVersion;
 
     static {
         current = new JVM();
@@ -26,8 +28,7 @@ public class JVM {
      */
     public static JVM current() {
         return current;
-    }
-    private int jdkVersion;
+    }    
 
     /**
      * Creates a new JVM data from the <code>java.version</code> System property
