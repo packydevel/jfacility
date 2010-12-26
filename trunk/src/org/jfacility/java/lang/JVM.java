@@ -34,7 +34,7 @@ public class JVM {
      *
      */
     public JVM() {
-        this(getVersion());
+        this(SystemProperty.getVersion());
     }
 
     /**
@@ -92,35 +92,12 @@ public class JVM {
     public boolean isOneDotSeven() {
         return jdkVersion == JDK1_7;
     }
-    
-    /**Restituisce la versione in uso di java
-     *
-     * @return Stringa versione java
-     */
-    public static String getVersion() {
-        return System.getProperty("java.version");
-    }
-    /**Restituisce vendor in uso di java
-     *
-     * @return Stringa vendor java
-     */
-    public static String getVendor() {
-        return System.getProperty("java.vendor");
-    }
-
-    public static String getHome() {
-        return System.getProperty("java.home");
-    }
 
     public static String getCommand(){
-        return getHome() + File.separator + "bin" + File.separator + "java";
-    }
-
-    public static String getTempDir(){
-        return System.getProperty("java.io.tmpdir");
-    }
+        return SystemProperty.getHome() + File.separator + "bin" + File.separator + "java";
+    }    
     
     public static boolean isVendorSun(){
-        return getVendor().toLowerCase().startsWith("sun");
+        return SystemProperty.getVendor().toLowerCase().startsWith("sun");
     }
 }
