@@ -2,7 +2,6 @@ package org.jfacility.java.lang;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  *
@@ -76,67 +75,5 @@ public class SystemFileManager {
         final Executer exec = new Executer(command);
         exec.addParameters(parameter);
         exec.start();
-    }
-    
-    public static void main (String[] args){
-        try {
-            String dir = "/home/luca/workspace";
-            openExplorer(new File(dir));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-}
-
-class Executer extends Thread implements Runnable{
-    private String command;
-    private ArrayList<String> parameter;
-    private Process process;
-    private int exitValue = -1;
-    private boolean gotInterrupted = false;
-    private Exception exception = null;
-
-    public Executer(final String command) {
-        super("Executer: " + command);
-        this.command = command;
-        this.parameter = new ArrayList<String>();
-    }
-    
-    public void addParameters(final String[] par) {
-        if (par == null) { return; }
-        for (final String p : par) {
-            this.parameter.add(p);
-        }
-    }
-    
-    @Override
-    public void run() {
-        if (this.command == null || this.command.trim().length() == 0)
-            return;
-
-        final ArrayList<String> params = new ArrayList<String>();
-        params.add(this.command);
-        params.addAll(this.parameter);
-        
-        final ProcessBuilder pb = new ProcessBuilder(params.toArray(new String[] {}));
-
-        try {
-            this.process = pb.start();
-            try {
-                this.process.waitFor();
-                this.exitValue = this.process.exitValue();
-            } catch (final InterruptedException e1) {
-                this.process.destroy();
-                this.gotInterrupted = true;
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }            
-            // must be called to clear interrupt flag
-            Thread.interrupted();
-        } catch (final IOException e1) {
-            this.exception = e1;
-            return;
-        }
     }
 }
