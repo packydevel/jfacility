@@ -6,7 +6,7 @@ import java.io.File;
  *
  * @author luca
  */
-public class MySystem {
+public class SystemProperty {
     /** Restituisce la cartella di lavoro attuale dell'utente
      *
      * @return stringa percorso
@@ -61,6 +61,29 @@ public class MySystem {
     public static String getOsVersion() {
         return System.getProperty("os.version");
     }
+    
+    /**Restituisce la versione in uso di java
+     *
+     * @return Stringa versione java
+     */
+    public static String getVersion() {
+        return System.getProperty("java.version");
+    }
+    /**Restituisce vendor in uso di java
+     *
+     * @return Stringa vendor java
+     */
+    public static String getVendor() {
+        return System.getProperty("java.vendor");
+    }
+
+    public static String getHome() {
+        return System.getProperty("java.home");
+    }
+    
+    public static String getTempDir(){
+        return System.getProperty("java.io.tmpdir");
+    }
 
     public static void printVariables() {
         for (String s : java.lang.System.getenv().keySet())
@@ -70,21 +93,5 @@ public class MySystem {
     public static void printProperties() {
         for (Object s : java.lang.System.getProperties().keySet())
             System.out.println(s + "=" + java.lang.System.getProperty((String) s));
-    }
-
-    /**Verifica se il sistema operativo in uso è windows
-     *
-     * @return true = windows, altrimenti false
-     */
-    public static boolean isWindows() {
-        boolean windows = false;
-        String osName = getOsName().toLowerCase();
-        if (!osName.equals("linux")) {
-            if ((osName.length() > 6)
-                    && (osName.substring(0, 7).toLowerCase().equalsIgnoreCase("windows"))) {
-                windows = true;
-            }
-        }
-        return windows;
     }
 }
