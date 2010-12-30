@@ -72,7 +72,8 @@ public class SystemFileManager {
         return null;
     }
     
-    private static void runCommand(final String command, final String[] optionList, final String parameter) {
+    private static void runCommand(final String command, final String[] optionList, 
+                                    final String parameter) {
         final Executer exec = new Executer(command);
         exec.setOptionList(optionList);
         exec.setParameter(parameter);
