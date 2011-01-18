@@ -40,6 +40,7 @@ public class DialogProgressBar extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				fireProgress(null, false, null);
+				DialogProgressBar.this.dispose();
 			}
 		});
 
