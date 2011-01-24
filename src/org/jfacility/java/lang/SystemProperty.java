@@ -84,6 +84,10 @@ public class SystemProperty {
     public static String getTempDir(){
         return System.getProperty("java.io.tmpdir");
     }
+    
+    public static String getSunDesktop(){
+        return System.getProperty("sun.desktop");
+    }
 
     public static void printVariables() {
         for (String s : java.lang.System.getenv().keySet())
