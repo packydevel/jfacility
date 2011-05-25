@@ -98,7 +98,7 @@ public class JVM {
         return SystemProperty.getHome() + File.separator + "bin" + File.separator + "java";
     }    
     
-    public static boolean isVendorSun(){
-        return SystemProperty.getVendor().toLowerCase().startsWith("sun");
+    public static boolean isRuntimeJava(){
+        return SystemProperty.getJavaRuntimeName().toLowerCase().startsWith("java");
     }
 }
