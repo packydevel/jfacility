@@ -76,6 +76,10 @@ public class SystemProperty {
     public static String getVendor() {
         return System.getProperty("java.vendor");
     }
+    
+    public static String getJavaRuntimeName(){
+        return System.getProperty("java.runtime.name");
+    }
 
     public static String getHome() {
         return System.getProperty("java.home");
