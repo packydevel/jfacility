@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
@@ -26,16 +27,12 @@ import javax.swing.table.TableRowSorter;
  */
 public class Swing {
 
-    /**
-     * Ridimensiona e trasforma in scala di grigi l'immagine usando un oggetto
+    /**Ridimensiona e trasforma in scala di grigi l'immagine usando un oggetto
      * graphics tramite la bufferedimage
      *
-     * @param colorImage
-     *            immagine originale
-     * @param width
-     *            nuova lunghezza
-     * @param height
-     *            nuova larghezza
+     * @param colorImage immagine originale
+     * @param width nuova lunghezza
+     * @param height nuova larghezza
      * @return immagine riscalata in scala di grigi
      */
     public static ImageIcon grayScaleImage(ImageIcon colorImage, int width,
@@ -48,16 +45,12 @@ public class Swing {
         return new ImageIcon(grayScaleImage);
     }
 
-    /**
-     * Ridimensiona l'immagine usando un oggetto graphics2d tramite la
+    /** Ridimensiona l'immagine usando un oggetto graphics2d tramite la
      * bufferedimage
      *
-     * @param image
-     *            immagine originale
-     * @param width
-     *            nuova lunghezza
-     * @param height
-     *            nuova larghezza
+     * @param image immagine originale
+     * @param width nuova lunghezza
+     * @param height nuova larghezza
      * @return immagine riscalata
      */
     public static ImageIcon scaleImage(ImageIcon image, int width, int height) {
@@ -71,15 +64,11 @@ public class Swing {
         return new ImageIcon(resizedImg);
     }
 
-    /**
-     * Imposta la dimensione fissa della colonna x la tabella
+    /**Imposta la dimensione fissa della colonna x la tabella
      *
-     * @param table
-     *            tabella
-     * @param col
-     *            colonna da impostare
-     * @param width
-     *            lunghezza
+     * @param table tabella
+     * @param col colonna da impostare
+     * @param width lunghezza
      */
     public static void setTableDimensionLockColumn(JTable table, int col,
             int width) {
@@ -171,14 +160,20 @@ public class Swing {
             String text) {
         int availableWidth = table.getColumnModel().getColumn(column).getWidth();
         availableWidth -= table.getIntercellSpacing().getWidth();
-        Insets borderInsets = label.getBorder().getBorderInsets(label);
+        if (label==null)
+            System.out.println("if (label==null)");
+        Border temp = label.getBorder();
+        if (temp==null)
+            System.out.println("if (temp==null)");
+        Insets borderInsets = temp.getBorderInsets(label);
+        if (borderInsets==null)
+            System.out.println("if (borderInsets==null)");
         availableWidth -= (borderInsets.left + borderInsets.right);
         FontMetrics fm = label.getFontMetrics(label.getFont());
-        if (fm.stringWidth(text) > availableWidth) {
+        if (fm.stringWidth(text) > availableWidth)
             return text;
-        } else {
+        else
             return null;
-        }
     }
 
     public static void tableSorter(JTable table) {
