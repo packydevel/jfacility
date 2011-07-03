@@ -187,13 +187,11 @@ public class Lang {
     /**Verifica se il testo non è nullo e non è uguale alla stringa ""
      *
      * @param text testo da verificare
-     * @return risultato verifica
+     * @return risultato verifica se nullo = false
      */
     public static boolean verifyTextNotNull(String text) {
-        boolean verify = false;
-        if ((text != null) && (!text.equalsIgnoreCase(""))) {
-            verify = true;
-        }
-        return verify;
+        if ((text != null) && (!text.equalsIgnoreCase("")))
+            return true;
+        return false;
     }
 }
