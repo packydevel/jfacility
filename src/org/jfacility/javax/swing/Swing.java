@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
@@ -156,18 +155,11 @@ public class Swing {
         return file;
     }
 
-    public static String getTextToolTip(JTable table, int column, JLabel label, String text) {
+    public static String getTextToolTip(JTable table, int column, JLabel label, String text) 
+                                                                throws NullPointerException{
         int availableWidth = table.getColumnModel().getColumn(column).getWidth();
-        System.out.println(availableWidth);
         availableWidth -= table.getIntercellSpacing().getWidth();
-        System.out.println(availableWidth);
-        if (label==null)
-            System.out.println("label=null");
-        Border temp = label.getBorder();
-        if (temp==null)
-            System.out.println("temp=null");
-        //TODO nullpointer?
-        Insets borderInsets = temp.getBorderInsets(label);
+        Insets borderInsets = label.getBorder().getBorderInsets(label);
         availableWidth -= (borderInsets.left + borderInsets.right);
         FontMetrics fm = label.getFontMetrics(label.getFont());
         if (fm.stringWidth(text) > availableWidth)
