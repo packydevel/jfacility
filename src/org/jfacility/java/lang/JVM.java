@@ -101,4 +101,8 @@ public class JVM {
     public static boolean isRuntimeJavaSun(){
         return SystemProperty.getJavaRuntimeName().toLowerCase().startsWith("java");
     }
+    
+    public static boolean isRuntimeOpenJDK(){
+        return SystemProperty.getJavaRuntimeName().toLowerCase().startsWith("openjdk");
+    }
 }
