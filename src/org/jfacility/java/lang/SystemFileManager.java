@@ -1,7 +1,12 @@
 package org.jfacility.java.lang;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  *
@@ -17,7 +22,7 @@ public class SystemFileManager {
             return false;
         JVM jvm = new JVM();
         if (jvm.isOrLater(16)) {
-            java.awt.Desktop.getDesktop().open(path);
+            Desktop.getDesktop().open(path);
             return true;
         }
         
@@ -31,14 +36,36 @@ public class SystemFileManager {
             final String spath = path.getAbsolutePath();
             final String[] optionList = (String[]) explorer[2];
             final String parameter = ((String) explorer[3]).replace("%%path%%", spath);
-
             runCommand((String) explorer[1], optionList, parameter);
             return true;
         }
-
         return false;
     }
     
+    
+    public static void browse(String file) throws IOException, MalformedURLException, 
+                                                            URISyntaxException{
+        Desktop.getDesktop().browse(getFileURI(file));
+    }
+    
+    //generate uri according to the filePath
+    private static URI getFileURI(String filePath) throws MalformedURLException, 
+                                                                URISyntaxException {
+        URI uri = null;
+        filePath = filePath.trim();
+        if(filePath.indexOf("http") == 0 || filePath.indexOf("\\") == 0){
+            if (filePath.indexOf("\\") == 0) 
+                filePath = "file:" + filePath;
+            filePath = filePath.replaceAll(" ", "%20");
+            URL url = new URL(filePath);
+            uri = url.toURI();
+        } else {
+            File file = new File(filePath);
+            uri = file.toURI();
+        }
+        return uri;
+    }
+  
     private static Object[] autoGetExplorerCommand() {
         if (OS.isWindows())
             return new String[] { "Explorer", "explorer", null, pathParameter};
@@ -79,4 +106,6 @@ public class SystemFileManager {
         exec.setParameter(parameter);
         exec.start();
     }
+    
+    
 }
