@@ -43,18 +43,10 @@ public class Swing {
         g.dispose();
         return new ImageIcon(grayScaleImage);
     }
-
-    /** Ridimensiona l'immagine usando un oggetto graphics2d tramite la
-     * bufferedimage
-     *
-     * @param image immagine originale
-     * @param width nuova lunghezza
-     * @param height nuova larghezza
-     * @return immagine riscalata
-     */
-    public static ImageIcon scaleImage(ImageIcon image, int width, int height) {
+    
+    public static ImageIcon scaleImageARGB(ImageIcon image, int width, int height) {
         BufferedImage resizedImg = new BufferedImage(width, height,
-                BufferedImage.TYPE_INT_RGB);
+                BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR);
