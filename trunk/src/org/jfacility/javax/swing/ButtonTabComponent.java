@@ -26,19 +26,19 @@ import javax.swing.plaf.basic.BasicButtonUI;
  * @author luca
  */
 public class ButtonTabComponent extends JPanel {
-    private final JTabbedPane pane;
+    private JTabbedPane pane;
+    private JLabel label;
 
-    public ButtonTabComponent(final JTabbedPane pane) {
+    public ButtonTabComponent(JTabbedPane _pane) {
         //unset default FlowLayout' gaps
         super(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        if (pane == null) {
+        if (_pane == null)
             throw new NullPointerException("TabbedPane is null");
-        }
-        this.pane = pane;
+        this.pane = _pane;
         setOpaque(false);
         
         //make JLabel read titles from JTabbedPane
-        JLabel label = new JLabel() {
+        label = new JLabel() {
             @Override
             public String getText() {
                 int i = pane.indexOfTabComponent(ButtonTabComponent.this);
@@ -57,6 +57,10 @@ public class ButtonTabComponent extends JPanel {
         add(button);
         //add more space to the top of the component
         setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
+    }
+    
+    public void setForegroundTab(Color c){
+        label.setForeground(c);
     }
 
     private class TabButton extends JButton implements ActionListener {
