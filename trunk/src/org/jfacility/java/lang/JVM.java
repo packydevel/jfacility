@@ -16,6 +16,7 @@ public class JVM {
     public final static int JDK1_5 = 15;
     public final static int JDK1_6 = 16;
     public final static int JDK1_7 = 17;
+    public final static int JDK1_8 = 18;
     
     private static JVM current;
     private int jdkVersion;
