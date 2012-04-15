@@ -6,7 +6,11 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 
 /**Classe di metodi riusabili del package java.awt
  * 
@@ -52,6 +56,25 @@ public class AWT {
     public static void setClipboard(String text) {
         StringSelection data = new StringSelection(text);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(data, data);
+    }
+    
+    /**
+    * Get the String residing on the clipboard.
+    *
+    * @return any text found on the Clipboard; if none found, return an
+    * empty String.
+    */
+    public static String getClipboard() {
+        String result = "";
+        Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
+        boolean hasTransferableText =(contents != null) && contents.isDataFlavorSupported(DataFlavor.stringFlavor);
+        if ( hasTransferableText ) {
+            try {
+                result = (String)contents.getTransferData(DataFlavor.stringFlavor);
+            } catch (UnsupportedFlavorException ex){
+            } catch (IOException ex) {}
+        }
+        return result;
     }
 
     /**
