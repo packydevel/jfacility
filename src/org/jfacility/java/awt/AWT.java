@@ -64,16 +64,12 @@ public class AWT {
     * @return any text found on the Clipboard; if none found, return an
     * empty String.
     */
-    public static String getClipboard() {
+    public static String getClipboard() throws UnsupportedFlavorException, IOException {
         String result = "";
         Transferable contents = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(null);
         boolean hasTransferableText =(contents != null) && contents.isDataFlavorSupported(DataFlavor.stringFlavor);
-        if ( hasTransferableText ) {
-            try {
-                result = (String)contents.getTransferData(DataFlavor.stringFlavor);
-            } catch (UnsupportedFlavorException ex){
-            } catch (IOException ex) {}
-        }
+        if ( hasTransferableText )
+            result = (String)contents.getTransferData(DataFlavor.stringFlavor);
         return result;
     }
 
